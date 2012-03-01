@@ -7,10 +7,12 @@ package com.precipicegames.zeryl.replenish;
 import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.block.Action;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -18,7 +20,7 @@ import org.bukkit.inventory.PlayerInventory;
  *
  * @author Zeryl
  */
-public class ReplenishPlayerListener extends PlayerListener {
+public class ReplenishPlayerListener implements Listener {
 
     private final Replenish plugin;
 
@@ -26,7 +28,7 @@ public class ReplenishPlayerListener extends PlayerListener {
         plugin = instance;
     }
 
-    @Override
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerInteract(PlayerInteractEvent event) {
         Action action = (Action) event.getAction();
         if ((action.equals(Action.RIGHT_CLICK_AIR)) && (event.getPlayer().getItemInHand().getType() == Material.SNOW_BALL)) {
